@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SearchBar from './components/SearchBar'
 import YTSearch from 'youtube-api-search';
-import API_KEY from './secrets.js'
+import API_KEY from './secrets'
 
 
 YTSearch({key: API_KEY, term: 'tutorials'}, function(data) {
