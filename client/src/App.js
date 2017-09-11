@@ -3,7 +3,7 @@ import './App.css';
 import VideoList from './components/VideoList';
 import SearchBar from './components/SearchBar';
 import YTSearch from 'youtube-api-search';
-const API_KEY = require('dotenv').config()
+const REACT_APP_APIKEY = require('dotenv').config()
 
 
 
@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       videos: []
     };
-    YTSearch({key: API_KEY, term: 'tutorials'}, (videos) => {
+    YTSearch({key: REACT_APP_APIKEY, term: 'tutorials'}, (videos) => {
       console.log({videos})      
       this.setState({videos})
     })
