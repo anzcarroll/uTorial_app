@@ -5,7 +5,7 @@ import VideoList from './components/VideoList';
 import SearchBar from './components/SearchBar';
 import YTSearch from 'youtube-api-search';
 import VideoDetail from './components/VideoDetail';
-
+import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 
 
@@ -16,11 +16,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videos: []
+      videos: [],
+      selectedVideo: null
     };
     YTSearch({key: process.env.REACT_APP_APIKEY, term: 'tutorials'}, (videos) => {
       console.log({videos})      
-      this.setState({videos})
+      this.setState({
+        videos: videos,
+      selectedVideo: videos[0] })
     })
     
   }
@@ -52,9 +55,11 @@ class App extends Component {
           <SearchBar />
         </div>
         <div className="App-intro">
-          <VideoDetail video={this.state.videos[0]}/>
+          <VideoDetail video={this.state.selectedVideo}/>
          Want to learn something, type in your topic and get to viewing!
-        <VideoList videos={this.state.videos} />
+        <VideoList 
+        onVideoSelected={ selectedVideo =>this.setState({selectedVideo})}
+        videos={this.state.videos} />
         </div>
       </div>
     );
