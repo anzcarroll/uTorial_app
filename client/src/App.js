@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 import VideoList from './components/VideoList';
 import SearchBar from './components/SearchBar';
 import YTSearch from 'youtube-api-search';
+import VideoDetail from './components/VideoDetail';
+
 
 
 
@@ -26,6 +29,20 @@ class App extends Component {
     console.log(process.env)
   }
 
+  _fetchVideos = async () => {
+    try {
+      const res = await axios.get('/api/videos');
+      await this.setState({videos: res.data});
+      return res.data;
+    }
+    catch (err) {
+      console.log(err)
+      await this.setState({error: err.message})
+      return err.message
+    }
+    
+  }
+
 
   render() {
     return (
@@ -35,6 +52,7 @@ class App extends Component {
           <SearchBar />
         </div>
         <div className="App-intro">
+          <VideoDetail video={this.state.videos[0]}/>
          Want to learn something, type in your topic and get to viewing!
         <VideoList videos={this.state.videos} />
         </div>
