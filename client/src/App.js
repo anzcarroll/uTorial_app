@@ -3,9 +3,8 @@ import './App.css';
 import VideoList from './components/VideoList';
 import SearchBar from './components/SearchBar';
 import YTSearch from 'youtube-api-search';
-// const API_KEY = require('dotenv').config()
+const API_KEY = require('dotenv').config()
 
-const API_KEY = 'AIzaSyBZJsl0lVKWrza3Bpp8PKmXlfY8XRo1gDE';
 
 
 class App extends Component {
