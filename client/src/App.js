@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import SearchBar from './components/SearchBar'
+import VideoList from './components/VideoList';
+import SearchBar from './components/SearchBar';
 import YTSearch from 'youtube-api-search';
-import API_KEY from './secrets'
+// const API_KEY = require('dotenv').config()
 
+const API_KEY = 'AIzaSyBZJsl0lVKWrza3Bpp8PKmXlfY8XRo1gDE';
 
-YTSearch({key: API_KEY, term: 'tutorials'}, function(data) {
-  console.log(data);
-})
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      videos: []
+    };
+    YTSearch({key: API_KEY, term: 'tutorials'}, (videos) => {
+      console.log({videos})      
+      this.setState({videos})
+    })
+    
+  }
   render() {
     return (
       <div className="App">
@@ -18,9 +27,10 @@ class App extends Component {
           <h2>Welcome to uTorial</h2>
           <SearchBar />
         </div>
-        <p className="App-intro">
+        <div className="App-intro">
          Want to learn something, type in your topic and get to viewing!
-        </p>
+        <VideoList videos={this.state.videos} />
+        </div>
       </div>
     );
   }
