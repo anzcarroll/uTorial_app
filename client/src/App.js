@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import VideoList from './components/VideoList';
@@ -19,24 +20,26 @@ class App extends Component {
       videos: [],
       selectedVideo: null
     };
+
     YTSearch({key: process.env.REACT_APP_APIKEY, term: 'tutorials'}, (videos) => {
       console.log({videos})      
       this.setState({
         videos: videos,
       selectedVideo: videos[0] })
-    })
+    });
     
   }
 
   componentWillMount() {
     console.log(process.env)
+    this._fetchVideos();
   }
 
   _fetchVideos = async () => {
     try {
-      const res = await axios.get('/api/videos');
-      await this.setState({videos: res.data});
-      return res.data;
+      const response = await axios.get('/api/tutorials');
+      await this.setState({videos: response.data});
+      return response.data;
     }
     catch (err) {
       console.log(err)
@@ -58,7 +61,7 @@ class App extends Component {
           <VideoDetail video={this.state.selectedVideo}/>
          Want to learn something, type in your topic and get to viewing!
         <VideoList 
-        onVideoSelected={ selectedVideo =>this.setState({selectedVideo})}
+        onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
         videos={this.state.videos} />
         </div>
       </div>
