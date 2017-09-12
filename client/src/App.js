@@ -20,26 +20,29 @@ class App extends Component {
       videos: [],
       selectedVideo: null
     };
-
+    this._videoSearch('tutorials');
+  }
+  _videoSearch (term) {
     YTSearch({key: process.env.REACT_APP_APIKEY, term: 'tutorials'}, (videos) => {
       console.log({videos})      
       this.setState({
         videos: videos,
-      selectedVideo: videos[0] })
+      selectedVideo: videos[0], 
+      })
     });
     
   }
 
   componentWillMount() {
-    console.log(process.env)
     this._fetchVideos();
   }
 
   _fetchVideos = async () => {
+    const key = process.env.REACT_APP_APIKEY
     try {
-      const response = await axios.get('/api/tutorials');
-      await this.setState({videos: response.data});
-      return response.data;
+      const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=tutorial&topicId=tutorial&key=${key}`);
+      await this.setState({videos: response.data.items});
+      console.log(response.data);
     }
     catch (err) {
       console.log(err)
@@ -55,7 +58,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome to uTorial</h2>
-          <SearchBar />
+          <SearchBar onSearchTermChange= {term => this._videoSearch(term) }/>
         </div>
         <div className="App-intro">
           <VideoDetail video={this.state.selectedVideo}/>
