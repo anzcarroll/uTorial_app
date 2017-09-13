@@ -1,44 +1,46 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import YTSearch from 'youtube-api-search';
+import styled from "styled-components";
 
+const Nav = styled.div`
+  width: 100%;
+  align-items: center;
+  padding: .30%;
 
+`
 
 class SearchBar extends Component {
     constructor() {
         super();
         this.state = {
-            term: 'tutorials',
-            searchedFor: ''
+            term: 'tutorial'
         }
+        this.videoSearch('tutorials');
     }
+    videoSearch (term) {
+        YTSearch({key: process.env.REACT_APP_APIKEY, term: term}, (videos) => {
+          console.log({videos})      
+          this.setState({
+            videos: videos,
+          selectedVideo: videos[0], 
+          })
+        });
+        
+      }
 
-componentWillMount(){
-    this._onInputChange();
-    this._fetchSearchSubmit();
-  }
-
-  _fetchSearchSubmit = async () => {
-    const key = process.env.REACT_APP_APIKEY
-    const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=tutorial&topicId=tutorial&key=${key}`)
-    this.setState({
-      searchedFor: response.data.description
-    })
-    console.log(response.data.description)
-  }
-    _onInputChange(term) {
+    onInputChange(term) {
         this.setState({term});
         this.props.onSearchTermChange(term);
     }
-    
 
     render() {
         return (
-            <div className="search-bar">
+            <Nav>
                 <input 
                 value={this.state.term}
-                onChange={event => this._onInputChange(event.target.value)}
-                onSubmit={event => this._fetchSearchSubmit(event.target.value)}/>
-            </div>
+                onChange={event => this.onInputChange(event.target.value)}/>
+            </Nav>
         );
     }
   

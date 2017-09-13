@@ -5,13 +5,15 @@
 
 .App-header {
   background-color: #2d4148;
-  height:120px;
-  padding: 20px;
-  color: #EAC67A;
+  padding: 10px;
+  color: #2d4148;
 }
 
 .App-intro {
-  font-size: large;
+  font-family: 'Ubuntu', sans-serif;
+  margin-top: 10px;
+  padding: 10px;
 }
+
 
 

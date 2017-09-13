@@ -8,7 +8,6 @@ class VideoList extends Component {
         console.log(this.props)
     }
     render() {
-        console.log(this.props);
         const videoItems =  this.props.videos.map((video) => {
                     return (
                     <VideoListItem 
