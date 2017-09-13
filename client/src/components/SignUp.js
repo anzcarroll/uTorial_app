@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+
+
 class SignUp extends Component {
     constructor() {
         super();
@@ -20,9 +22,9 @@ class SignUp extends Component {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
+            password_confirmation: this.state.password_confirmation
         }
-        const response = await axios.post('/users/sign_up', payload);
-
+        const response = await axios.post('/api/users', payload);
         this.setState({ redirect: true })
     }
 
@@ -45,8 +47,8 @@ class SignUp extends Component {
             <div>
                 <form onSubmit={this._signUp}>
                     <div>
-                        <label htmlFor="name">Name: </label>
-                        <input onChange={this._handleChange} type="text" name="name" value={this.state.name} />
+                        <label htmlFor="username">Username: </label>
+                        <input onChange={this._handleChange} type="text" name="username" value={this.state.username} />
                     </div>
                     <div>
                         <label htmlFor="email">E-mail: </label>

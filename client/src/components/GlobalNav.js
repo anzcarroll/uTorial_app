@@ -42,7 +42,7 @@ class GlobalNav extends Component {
     }
   
     _isLoggedIn = async () => {
-      const response = await axios.get("/users/sign_in");
+      const response = await axios.get("/api/users/:id");
       this.setState({
         user: response.data.data,
         loggedIn: response.data.success
@@ -51,7 +51,7 @@ class GlobalNav extends Component {
     
     _logOut = async () => {
       console.log("CLICK");
-      const response = await axios.delete("/users/sign_out");
+      const response = await axios.delete("/api/users/:id");
       //Forces refresh of browser
       window.location.reload();
     };
@@ -64,7 +64,7 @@ class GlobalNav extends Component {
               <h1>uTorial</h1>
             </Link>
            
-              <span>Signed In As: {this.state.user.username}</span>
+              <span>Signed In As: {this.state.users.username}</span>
               <a href="#" onClick={this._logOut}> Log Out </a>
             
           </Nav>
