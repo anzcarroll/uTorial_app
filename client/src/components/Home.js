@@ -22,56 +22,61 @@ class Home extends Component {
     super(props);
     this.state = {
       videos: [],
-      selectedVideo: null
+      selectedVideo: null,
+      term: 'tutorials'
     };
-    this.videoSearch('tutorials');
-  }
-  videoSearch (term) {
-    YTSearch({key: process.env.REACT_APP_APIKEY, term: term}, (videos) => {
-      console.log({videos})      
-      this.setState({
-        videos: videos,
-      selectedVideo: videos[0], 
-      })
-    });
-    
+   
   }
 
   componentWillMount() {
-    this.fetchVideos();
+    this._videoSearch('tutorials');
+    // this._fetchVideos();
   }
 
-  fetchVideos = async () => {
+  _fetchVideos = async () => {
     const key = process.env.REACT_APP_APIKEY
     const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=tutorial&topicId=/m/01k8wb&key=${key}`;
     try {
       const response = await axios.get(uri);
-      await this.setState({videos: response.data.items});
+      await this.setState({ videos: response.data.items });
       console.log(response.data.items);
     }
     catch (err) {
       console.log(err)
-      await this.setState({error: err.message})
+      await this.setState({ error: err.message })
       return err.message
     }
-    
+
+  }
+
+
+  _videoSearch = (term) => {
+    YTSearch({ key: process.env.REACT_APP_APIKEY, term: term }, (videos) => {
+      console.log({ videos })
+      this._fetchVideos();
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0], 
+      })
+    });
+
   }
 
 
   render() {
-    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300)
+    // const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300)
 
     return (
       <div className="App">
-             <div className="App-header">
-          <SearchBar onSearchTermChange= {videoSearch}/>
+        <div className="App-header">
+          <SearchBar onSearchTermChange={this._videoSearch} />
         </div>
         <div className="App-intro">
-          <VideoDetail video={this.state.selectedVideo}/>
-         Want to learn something, type in your topic and get to viewing!
-        <VideoList 
-        onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
-        videos={this.state.videos} />
+          <VideoDetail video={this.state.selectedVideo} />
+          Want to learn something, type in your topic and get to viewing!
+        <VideoList
+            onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+            videos={this.state.videos} />
         </div>
       </div>
     );

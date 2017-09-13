@@ -8,6 +8,7 @@ class SignUp extends Component {
     constructor() {
         super();
         this.state = {
+            id: '',
             username: '',
             email: '',
             password: '',
@@ -25,7 +26,11 @@ class SignUp extends Component {
             password_confirmation: this.state.password_confirmation
         }
         const response = await axios.post('/api/users', payload);
-        this.setState({ redirect: true })
+        console.log(response.data)
+        this.props.user(response.data)
+        this.setState({ 
+            id: response.data.id,
+            redirect: true })
     }
 
     _signIn = (e) => {
@@ -41,7 +46,7 @@ class SignUp extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to='' />
+            return <Redirect to='/mypage' />
         }
         return (
             <div>

@@ -6,6 +6,7 @@ class SignUp extends Component {
     constructor() {
         super();
         this.state = {
+            id: '',
             username: '',
             email: '',
             password: '',
@@ -20,9 +21,13 @@ class SignUp extends Component {
             email: this.state.email,
             password: this.state.password,
         }
-        const response = await axios.post('/users/sign_in', payload);
-
-        this.setState({ redirect: true })
+        const response = await axios.post('', payload);
+        this.props.user(response.data)
+        this.setState({
+            id:
+            response.data.id,
+            redirect: true
+        })
     }
 
     _handleChange = (e) => {
@@ -33,25 +38,25 @@ class SignUp extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/" />
+            return <Redirect to='/' />
         }
-        return (
-            <div>
-                <form onSubmit={this._signIn}>
+                return (
                     <div>
-                        <label htmlFor="email">E-mail: </label>
-                        <input onChange={this._handleChange} type="text" name="email" value={this.state.email} />
+                        <form onSubmit={this._signIn}>
+                            <div>
+                                <label htmlFor="email">E-mail: </label>
+                                <input onChange={this._handleChange} type="text" name="email" value={this.state.email} />
+                            </div>
+                            <div>
+                                <label htmlFor="password">Password: </label>
+                                <input onChange={this._handleChange} type="text" name="password" value={this.state.password} />
+                            </div>
+                            <button>Sign In</button>
+                            <button onClick="/signup">Sign Up</button>
+                        </form>
                     </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input onChange={this._handleChange} type="text" name="password" value={this.state.password} />
-                    </div>
-                    <button>Sign In</button>
-                    <button onClick="/signup">Sign Up</button>
-                </form>
-            </div>
-        );
+                );
+        }
     }
-}
 
-export default SignUp;
+    export default SignUp;
