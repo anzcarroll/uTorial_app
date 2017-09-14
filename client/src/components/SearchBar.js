@@ -16,28 +16,18 @@ class SearchBar extends Component {
         this.state = {
             term: ''
         }
-        // this.videoSearch('tutorials');
     }
-    // videoSearch (term) {
-    //     YTSearch({key: process.env.REACT_APP_APIKEY, term: term}, (videos) => {
-    //       console.log({videos})      
-    //       this.setState({
-    //         videos: videos,
-    //       selectedVideo: videos[0], 
-    //       })
-    //     });
-        
-    //   }
 
-    _handleChange = (e) => {
+
+    _handleChange = (term) => {
+        this.setState({term});
+        this.props.onSearchTermChange(this.state.term);
+    }
+
+    _onSubmitSearch = (e) => {
         const newState = { ...this.state };
         newState[e.target.name] = e.target.value;
         this.setState(newState);
-    }
-    _onSubmitSearch = (event) => {
-        event.preventDefault();
-        console.log(this)
-        this.props.onSearchTermChange(this.state.term);
     }
     render() {
         return (
@@ -46,7 +36,7 @@ class SearchBar extends Component {
                     <input 
                     name="term"
                     value={this.state.term}
-                    onChange={this._handleChange}/>
+                    onChange={event }/>
                     <button>Search</button>
                 </form>
             </Nav>

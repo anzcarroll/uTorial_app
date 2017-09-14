@@ -23,23 +23,29 @@ class Home extends Component {
     this.state = {
       videos: [],
       selectedVideo: null,
-      term: 'tutorials'
+      term: 'tutorials',
+      error: ''
     };
-   
+
   }
 
   componentWillMount() {
-    this._videoSearch('tutorials');
-    // this._fetchVideos();
+    // this._videoSearch('tutorials');
+    this._fetchVideos();
   }
 
-  _fetchVideos = async () => {
+  _fetchVideos = async (term) => {
     const key = process.env.REACT_APP_APIKEY
-    const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&q=tutorial&topicId=/m/01k8wb&key=${key}`;
+    const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=relevance&topicId=%2Fm%2F01k8wb&type=video&videoSyndicated=true&key=${key}`;
     try {
       const response = await axios.get(uri);
-      await this.setState({ videos: response.data.items });
-      console.log(response.data.items);
+      let videos = response.data.items;
+      let selectedVideo = videos[0];
+      await this.setState({
+        videos: videos,
+        selectedVideo: selectedVideo,
+      });
+      // console.log(this.state);
     }
     catch (err) {
       console.log(err)
@@ -52,24 +58,22 @@ class Home extends Component {
 
   _videoSearch = (term) => {
     YTSearch({ key: process.env.REACT_APP_APIKEY, term: term }, (videos) => {
-      console.log({ videos })
-      this._fetchVideos();
+      // console.log({ videos })
       this.setState({
         videos: videos,
-        selectedVideo: videos[0], 
+        selectedVideo: videos[0]
       })
-    });
-
+    })
   }
 
 
   render() {
-    // const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300)
+
 
     return (
       <div className="App">
         <div className="App-header">
-          <SearchBar onSearchTermChange={this._videoSearch} />
+          <SearchBar onSearchTermChange={this._fetchVideos()} />
         </div>
         <div className="App-intro">
           <VideoDetail video={this.state.selectedVideo} />
