@@ -30,22 +30,21 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    // this._videoSearch('tutorials');
     this._fetchVideos();
   }
 
-  _fetchVideos = async (term) => {
+  _fetchVideos = async () => {
     const key = process.env.REACT_APP_APIKEY
     const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=relevance&topicId=%2Fm%2F01k8wb&type=video&videoSyndicated=true&key=${key}`;
     try {
+      
       const response = await axios.get(uri);
-      let videos = response.data.items;
-      let selectedVideo = videos[0];
-      await this.setState({
-        videos: videos,
-        selectedVideo: selectedVideo,
+      await this.setState({ 
+        videos: response.data.items,
+        selectedVideo: response.data.items[0] 
       });
-      // console.log(this.state);
+      // console.log(response.data.items);
+
     }
     catch (err) {
       console.log(err)
@@ -56,24 +55,23 @@ class Home extends Component {
   }
 
 
-  _videoSearch = (term) => {
-    YTSearch({ key: process.env.REACT_APP_APIKEY, term: term }, (videos) => {
-      // console.log({ videos })
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      })
-    })
-  }
+  // _videoSearch = (term) => {
+  //   // this._fetchVideos();
+  //   YTSearch({ key: process.env.REACT_APP_APIKEY, term: term }, (videos) => {
+  //     console.log(videos)
+  //     this.setState({
+  //       videos: videos,
+  //       selectedVideo: videos[0]
+  //     })
+  //   })
+  // }
 
 
   render() {
-
-
     return (
       <div className="App">
         <div className="App-header">
-          <SearchBar onSearchTermChange={this._fetchVideos()} />
+          <SearchBar onSearchTermChange={() => this._fetchVideos()} />
         </div>
         <div className="App-intro">
           <VideoDetail video={this.state.selectedVideo} />
