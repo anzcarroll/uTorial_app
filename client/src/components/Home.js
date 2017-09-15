@@ -58,16 +58,16 @@ class Home extends Component {
   
 
 
-  _videoSearch = (term) => {
-    YTSearch({ key: process.env.REACT_APP_APIKEY, part: 'snippet', term: term, type: 'video' }, (videos) => {
-      console.log(videos)
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      })
+  // _videoSearch = (term) => {
+  //   YTSearch({ key: process.env.REACT_APP_APIKEY, part: 'snippet', term: term, type: 'video', topicId: '%2Fm%2F01k8wb' }, (videos) => {
+  //     console.log(videos)
+  //     this.setState({
+  //       videos: videos,
+  //       selectedVideo: videos[0]
+  //     })
 
-    })
-  }
+  //   })
+  // }
 
 
   
@@ -77,7 +77,7 @@ class Home extends Component {
 
 
   render() {
-    const videoSearch = _.debounce((term) => { this._videoSearch(term)}, 300)
+    const videoSearch = _.debounce((term) => { this._fetchVideos(term)}, 300)
     return (
       <div className="App">
         <div className="App-header">

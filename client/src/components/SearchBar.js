@@ -25,7 +25,9 @@ class SearchBar extends Component {
         this.setState(newState);
     }
 
-    _onSubmitSearch = ( term) => {
+    _onSubmitSearch = (e, term) => {
+        e.preventDefault();
+        console.log(term)
         // const newState = { ...this.state };
         // newState[e.target.name] = e.target.value;
         // this.setState(newState);
@@ -35,7 +37,7 @@ class SearchBar extends Component {
     render() {
         return (
             <Nav>
-                <form onSubmit={() => this._onSubmitSearch}>
+                <form onSubmit={(e) => this._onSubmitSearch(e)}>
                     <input
                         name="term"
                         value={this.state.term}
