@@ -50,26 +50,28 @@ class SignUp extends Component {
         }
         return (
             <div>
-                <form onSubmit={this._signUp}>
-                    <div>
-                        <label htmlFor="username">Username: </label>
-                        <input onChange={this._handleChange} type="text" name="username" value={this.state.username} />
+                <form onSubmit={this._signUp} className="col-md-8 signUpForm">
+                    <div className="form-group row">
+                        <label htmlFor="username" className="col-sm-2 col-form-label">Username: </label>
+                        <input onChange={this._handleChange} className="form-control signUpForm" type="text" name="username" value={this.state.username} />
                     </div>
-                    <div>
-                        <label htmlFor="email">E-mail: </label>
-                        <input onChange={this._handleChange} type="text" name="email" value={this.state.email} />
+                    <div className="form-group row">
+                        <label htmlFor="email" className="col-sm-2 col-form-label">E-mail: </label>
+                        <input onChange={this._handleChange} className="form-control signUpForm" type="text" name="email" value={this.state.email} />
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input onChange={this._handleChange} type="text" name="password" value={this.state.password} />
+                    <div className="form-group row">
+                        <label htmlFor="password" className="col-sm-2 col-form-label">Password: </label>
+                        <input onChange={this._handleChange} className="form-control signUpForm" type="text" name="password" value={this.state.password} />
                     </div>
-                    <div>
-                        <label htmlFor="password">Confirm Password: </label>
-                        <input onChange={this._handleChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
+                    <div className="form-group row">
+                        <label htmlFor="password" className="col-sm-2 col-form-label">Confirm Password: </label>
+                        <input onChange={this._handleChange} className="form-control signUpForm" type="text" name="password_confirmation" value={this.state.password_confirmation} />
                     </div>
-
-                    <button>Sign Up</button>
-                    <button onClick={this._signIn}>Log In</button>
+                    <div className="col-md-6 offset-md-3">
+                    <button className="btn btn-primary" >Sign Up</button>
+                    <button className="btn btn-primary" onClick={this._signIn}>Log In</button>
+                    </div>
                 </form>
             </div>
         );

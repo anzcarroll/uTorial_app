@@ -1,24 +1,37 @@
-# README
+# uTorial
+* Initial Requirements: 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Heroku Link: https://utorialapp.herokuapp.com/
 
-Things you may want to cover:
+* GitHub Repo: https://github.com/anzcarroll/uTorial_app
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+# Technologies Used
+* React
+* Ruby on Rails
+* HTML5
+* CSS
+* PostgreSQL / ActiveRecord
+* bootstrap
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## FUTURE DEV
+* devise
+* drag&drop features
+* sort by categories
+* favorites show catergories
 
-* Deployment instructions
 
-* ...
+## ERD (Database Modeling)
+![ERD](/public/images/?raw=true)
+
+
+
+## Wireframes
+![ERD](/public/images/IMG_2402.JPG?raw=true)
+![ERD](/public/images/IMG_2403.JPG?raw=true)
+![ERD](/public/images/IMG_2404.JPG?raw=true)
+![ERD](/public/images/IMG_2405.JPG?raw=true)

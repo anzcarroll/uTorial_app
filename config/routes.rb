@@ -18,9 +18,8 @@ Rails.application.routes.draw do
   root 'home#index'
   namespace :api do
     resources :tutorials
-    resources :users do
-    resources :favorites, only: [:index]
-    end
+    resources :users
+    resources :favorites
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -6,6 +6,18 @@ class FavoritesController < ApplicationController
     
         render json: @favorites
       end
+
+      def create
+        @user = User.find(params[:user_id])
+        @favorite = @user.favorites.new
+
+        if @favorite.save
+          render json: @favorite
+        else
+          render json: {
+            message: 'Error when creating Artist'
+          }
+      end
     
       def show
         @user = User.find(params[:user_id])
