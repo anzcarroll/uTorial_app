@@ -25,9 +25,11 @@ class SearchBar extends Component {
         this.setState(newState);
     }
 
-    _onSubmitSearch = (term) => {
-        // debugger;
-        console.log(this);
+    _onSubmitSearch = ( term) => {
+        // const newState = { ...this.state };
+        // newState[e.target.name] = e.target.value;
+        // this.setState(newState);
+        this.setState({term})
         this.props.onSearchTermChange(this.state.term);
     }
     render() {
