@@ -26,13 +26,14 @@ class SearchBar extends Component {
     }
 
     _onSubmitSearch = (term) => {
+        // debugger;
         console.log(this);
         this.props.onSearchTermChange(this.state.term);
     }
     render() {
         return (
             <Nav>
-                <form onSubmit={this._onSubmitSearch}>
+                <form onSubmit={() => this._onSubmitSearch}>
                     <input
                         name="term"
                         value={this.state.term}

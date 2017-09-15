@@ -33,26 +33,30 @@ class Home extends Component {
     this._fetchVideos();
   }
 
-  _fetchVideos = async () => {
-    const key = process.env.REACT_APP_APIKEY
-    const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=relevance&topicId=%2Fm%2F01k8wb&type=video&videoSyndicated=true&key=${key}`;
-    try {
-      
-      const response = await axios.get(uri);
-      await this.setState({ 
-        videos: response.data.items,
-        selectedVideo: response.data.items[0] 
-      });
-      // console.log(response.data.items);
+  _fetchVideos = async (term) => {
+      const key = process.env.REACT_APP_APIKEY;
+      const uri = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=relevance&q=${term}&topicId=%2Fm%2F01k8wb&type=video&videoSyndicated=true&key=${key}`;
+
+      try {
+
+        const response = await axios.get(uri);
+        await this.setState({
+          videos: response.data.items,
+          selectedVideo: response.data.items[0],
+          term: term
+        });
+        // console.log(response.data.items);
+
+      }
+      catch (err) {
+        console.log(err)
+        await this.setState({ error: err.message })
+        return err.message
+      }
 
     }
-    catch (err) {
-      console.log(err)
-      await this.setState({ error: err.message })
-      return err.message
-    }
-
-  }
+    
+  
 
 
   // _videoSearch = (term) => {
