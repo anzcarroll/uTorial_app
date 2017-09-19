@@ -5,6 +5,8 @@
 
 * GitHub Repo: https://github.com/anzcarroll/uTorial_app
 
+* Trello: https://trello.com/b/YRRLUUGg/capstone-utorial
+
 
 
 

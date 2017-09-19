@@ -42,17 +42,17 @@ class SignUp extends Component {
         }
                 return (
                     <div>
-                        <form onSubmit={this._signIn}>
+                        <form onSubmit={this._signIn} className="col-md-6">
                             <div>
-                                <label htmlFor="email">E-mail: </label>
-                                <input onChange={this._handleChange} type="text" name="email" value={this.state.email} />
+                                <label htmlFor="email" className="col-sm-2">E-mail: </label>
+                                <input onChange={this._handleChange} type="text" className="form-control" name="email" value={this.state.email} />
                             </div>
                             <div>
-                                <label htmlFor="password">Password: </label>
-                                <input onChange={this._handleChange} type="text" name="password" value={this.state.password} />
+                                <label htmlFor="password" className="col-sm-2">Password: </label>
+                                <input onChange={this._handleChange} type="text" className="form-control" name="password" value={this.state.password} />
                             </div>
-                            <button>Sign In</button>
-                            <button onClick="/signup">Sign Up</button>
+                            <button className="btn btn-primary">Sign In</button>
+                            <button className="btn btn-primary">Sign Up</button>
                         </form>
                     </div>
                 );
