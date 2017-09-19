@@ -28,7 +28,7 @@
 
 
 ## ERD (Database Modeling)
-![ERD](/images/?raw=true)
+![ERD](/images/utorialERD.png?raw=true)
 
 
 
