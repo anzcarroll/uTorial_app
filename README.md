@@ -28,12 +28,12 @@
 
 
 ## ERD (Database Modeling)
-![ERD](/public/images/?raw=true)
+![ERD](/images/?raw=true)
 
 
 
 ## Wireframes
-![ERD](/public/images/IMG_2402.png?raw=true)
-![ERD](/public/images/IMG_2403.png?raw=true)
-![ERD](/public/images/IMG_2404.png?raw=true)
-![ERD](/public/images/IMG_2405.png?raw=true)
+![Wireframe](/images/IMG_2402.png?raw=true)
+![Wireframe](/images/IMG_2403.png?raw=true)
+![Wireframe](/images/IMG_2404.png?raw=true)
+![Wireframe](/images/IMG_2405.png?raw=true)
