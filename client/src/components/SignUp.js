@@ -58,7 +58,7 @@ class SignUp extends Component {
                     <div className="form-group row">
                         <label htmlFor="email" className="col-sm-2 col-form-label">E-mail: </label>
                         <input onChange={this._handleChange} className="form-control signUpForm" type="text" name="email" value={this.state.email} />
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="password" className="col-sm-2 col-form-label">Password: </label>
