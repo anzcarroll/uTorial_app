@@ -18,6 +18,7 @@ class FavoritesController < ApplicationController
             message: 'Error when creating Artist'
           }
       end
+    end
     
       def show
         @user = User.find(params[:user_id])
